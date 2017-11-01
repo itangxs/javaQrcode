@@ -3,11 +3,11 @@
 <head>
     <title>hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
 </head>
 <body>
-<!--/*@thymesVar id="name" type="java.lang.String"*/-->
-<p th:text="'Hello！, ' + ${name} + '!'" >6666</p>
+
+<!--/*@thymesVar id="sessionId" type="java.lang.String"*/-->
+<h1 th:text="${sessionId}">sessionId</h1>
 </body>
 <script type="text/javascript" src="/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/js/getOpenId.js"></script>

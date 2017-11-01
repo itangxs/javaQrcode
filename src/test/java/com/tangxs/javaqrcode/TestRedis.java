@@ -1,15 +1,14 @@
 package com.tangxs.javaqrcode;
 
+import com.tangxs.javaqrcode.util.RedisUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.tangxs.javaqrcode.util.RedisUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,15 +17,12 @@ import java.util.concurrent.TimeUnit;
 public class TestRedis {
 
     @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-    
-    @Autowired
     private RedisTemplate redisTemplate;
 
     @Test
     public void test() throws Exception {
-        RedisUtil.set("aaa", "111");
-        Assert.assertEquals("111", stringRedisTemplate.opsForValue().get("aaa"));
+        RedisUtil.set("aaa1111", "测试啊111");
+        Assert.assertEquals("测试啊111", RedisUtil.get("aaa1111"));
     }
     
     @Test
