@@ -1,12 +1,16 @@
 package com.tangxs.javaqrcode.controller;
 
+import com.tangxs.javaqrcode.service.AsyncTask;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.tangxs.javaqrcode.util.GetWeiXinCode;
 import com.tangxs.javaqrcode.util.SendPushPost;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author tangxs
@@ -15,11 +19,23 @@ import com.tangxs.javaqrcode.util.SendPushPost;
 @Controller
 public class GetWeChatOpenIdController {
 
+    @Autowired
+    AsyncTask asyncTask;
     @RequestMapping("/index")
-    public ModelAndView index()
+    public ModelAndView index(HttpSession session)
     {
+            String sessionId = session.getId();
+            System.out.println("sessionId = [" + sessionId + "]");
             ModelAndView view = new ModelAndView("index");
-            view.addObject("name","index");
+            view.addObject("sessionId",sessionId);
+            try
+            {
+                asyncTask.doTask(sessionId,null);
+            }
+            catch (Exception e)
+            {
+                System.out.println("Exception = [" + e.getMessage() + "]");
+            }
             return view;
     }
 
